@@ -6,50 +6,67 @@ const printToDom = (domString, divId) => {
   document.getElementById(divId).innerHTML += domString;
 }
 
-const domStringBuilder = (userArr) => {
+const domStringBuilder2 = (userArr) => {
   let domString = '';
-  userArr.forEach(element => {
     domString += `<div class="col-md-6">`
-    domString += `<h3>${element}</h3>`
+    domString += `<h3>${userArr.total}</h3>`
     domString += `</div>`
-  });
   printToDom(domString, 'pic-holder');
 }
 
-const domStringBuilder2 = (userArr) => {
+const domStringBuilder = (userArr) => {
   let domString = '';
  
     domString += `<div class="col-md-6">`
-    domString += `<h3>${userArr}</h3>`
+    domString += `<h3>${userArr.name}</h3>`
+    domString += `<img src="${userArr.gravatar_url}">`
+    domString += `<h3>${userArr.points.total}</h3>`
     domString += `</div>`
 
   printToDom(domString, 'pic-holder');
+
 }
 
 const inputter = () => {
 
 }
 
-// Input 
+// Winner Bar
+let totalPoints = [] 
 
-
+const pointBuilder = (pointsArr) => {
+  if(totalPoints[0] > totalPoints[1]){
+    console.log("The winner is Player 1")
+  }
+  else if(totalPoints[0] < totalPoints[1]){
+    console.log("The winner is Player 2")
+  }
+  else if(totalPoints[0] = totalPoints[1]){
+    console.log("It's a tie!")
+  }
+  else {
+    console.log("Error!!")
+  }
+}
 
 // Button Event Listener
 
 document.getElementById('btn1').addEventListener("click", startApp);
 document.getElementById('btn1').addEventListener("click", startAppAgn)
 
-
 // XHR
 
-function iLoad() {
+function player1() {
   const data = JSON.parse(this.responseText);
-  domStringBuilder2(data.name);
+  domStringBuilder(data);
+  totalPoints.push(data.points.total);
 }
 
-function loadAgain() {
+function player2() {
   const data = JSON.parse(this.responseText);
-  domStringBuilder2(data.name);
+  domStringBuilder(data);
+  totalPoints.push(data.points.total);
+  pointBuilder(totalPoints)
 }
 
 function iFail() {
@@ -59,7 +76,7 @@ function iFail() {
 function startApp() {
   let userName = document.getElementById('user1').value
   let myRequest = new XMLHttpRequest;
-  myRequest.addEventListener("load", iLoad);
+  myRequest.addEventListener("load", player1);
   myRequest.addEventListener("error", iFail);
   myRequest.open("GET", "https://teamtreehouse.com/" + userName + ".json");
   myRequest.send();
@@ -68,7 +85,7 @@ function startApp() {
 function startAppAgn() {
   let userName = document.getElementById('user2').value
   let myRequest = new XMLHttpRequest;
-  myRequest.addEventListener("load", loadAgain);
+  myRequest.addEventListener("load", player2);
   myRequest.addEventListener("error", iFail);
   myRequest.open("GET", "https://teamtreehouse.com/" + userName + ".json");
   myRequest.send();
