@@ -35,24 +35,32 @@ const inputter = () => {
 let totalPoints = [] 
 
 const pointBuilder = (pointsArr) => {
+  let domString = '';
   if(totalPoints[0] > totalPoints[1]){
-    console.log("The winner is Player 1")
+    domString += `<div class="col-md-6 col-md-offset-3">`
+    domString += `<h3>"The Winner is Player 1"</h3>`
+    domString += `</div>`
   }
   else if(totalPoints[0] < totalPoints[1]){
-    console.log("The winner is Player 2")
+    domString += `<div class="col-md-6 col-md-offset-3">`
+    domString += `<h3>"The winner is Player 2"</h3>`
+    domString += `</div>`
   }
   else if(totalPoints[0] = totalPoints[1]){
-    console.log("It's a tie!")
+    domString += `<div class="col-md-6 col-md-offset-3">`
+    domString += `<h3>"It's a tie!"</h3>`
+    domString += `</div>`
   }
   else {
     console.log("Error!!")
   }
+  printToDom(domString, "winner")
 }
 
 // Button Event Listener
 
-document.getElementById('btn1').addEventListener("click", startApp);
-document.getElementById('btn1').addEventListener("click", startAppAgn)
+document.getElementById('btn1').addEventListener("click", startPlayer1);
+document.getElementById('btn1').addEventListener("click", startPlayer2)
 
 // XHR
 
@@ -73,7 +81,7 @@ function iFail() {
   console.log('Something went wrong!');
 }
 
-function startApp() {
+function startPlayer1() {
   let userName = document.getElementById('user1').value
   let myRequest = new XMLHttpRequest;
   myRequest.addEventListener("load", player1);
@@ -82,7 +90,7 @@ function startApp() {
   myRequest.send();
 };
 
-function startAppAgn() {
+function startPlayer2() {
   let userName = document.getElementById('user2').value
   let myRequest = new XMLHttpRequest;
   myRequest.addEventListener("load", player2);
