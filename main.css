@@ -6,7 +6,7 @@ body {
 
 .user-card {
   border: 2px solid black;
-  background-color: brown;
+  background-color: darkslategray;
   margin-top: 1.5em;
 
 }
@@ -15,18 +15,27 @@ body {
   color: white;
 }
 
-.user-card img {
+.user-image {
   height: auto;
-  width: 70%;
+  width: 50%;
 }
 
 .winner-card {
   border: 2px solid black;
-  background-color: gold;
+  background-color: firebrick;
   color:white;
   margin-top: 1em;
 }
 
+.user-card .badge-bay {
+  height: auto;
+  width: 10%;
+}
+
 input {
   color: black;
+}
+
+.badges {
+  margin-top: 1em;
 }

@@ -7,20 +7,21 @@ const printToDom = (domString, divId) => {
 }
 
 const domStringBuilder = (userArr) => {
-  let domString = '';
- 
+  let domString = ''; 
     domString += `<div class="col-md-6 user-card">`
     domString += `<h3>${userArr.name}</h3>`
-    domString += `<img src="${userArr.gravatar_url}">`
+    domString += `<img class="img-circle user-image" src="${userArr.gravatar_url}">`
+    domString += `<div class="row">`
+    domString += `<div class="col-md-12 badges">`
+    userArr.badges.forEach(badge => {
+      domString += `<img class="badge-bay" src="${badge.icon_url}">`
+    });
+    domString += `</div>`
+    domString += `</div>`
     domString += `<h3>${userArr.points.total}</h3>`
     domString += `</div>`
 
   printToDom(domString, 'pic-holder');
-
-}
-
-const inputter = () => {
-
 }
 
 // Winner Bar
