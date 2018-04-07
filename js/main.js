@@ -6,18 +6,10 @@ const printToDom = (domString, divId) => {
   document.getElementById(divId).innerHTML += domString;
 }
 
-const domStringBuilder2 = (userArr) => {
-  let domString = '';
-    domString += `<div class="col-md-6">`
-    domString += `<h3>${userArr.total}</h3>`
-    domString += `</div>`
-  printToDom(domString, 'pic-holder');
-}
-
 const domStringBuilder = (userArr) => {
   let domString = '';
  
-    domString += `<div class="col-md-6">`
+    domString += `<div class="col-md-6 user-card">`
     domString += `<h3>${userArr.name}</h3>`
     domString += `<img src="${userArr.gravatar_url}">`
     domString += `<h3>${userArr.points.total}</h3>`
@@ -37,17 +29,17 @@ let totalPoints = []
 const pointBuilder = (pointsArr) => {
   let domString = '';
   if(totalPoints[0] > totalPoints[1]){
-    domString += `<div class="col-md-6 col-md-offset-3">`
+    domString += `<div class="col-md-6 col-md-offset-3 winner-card">`
     domString += `<h3>"The Winner is Player 1"</h3>`
     domString += `</div>`
   }
   else if(totalPoints[0] < totalPoints[1]){
-    domString += `<div class="col-md-6 col-md-offset-3">`
+    domString += `<div class="col-md-6 col-md-offset-3 winner-card">`
     domString += `<h3>"The winner is Player 2"</h3>`
     domString += `</div>`
   }
   else if(totalPoints[0] = totalPoints[1]){
-    domString += `<div class="col-md-6 col-md-offset-3">`
+    domString += `<div class="col-md-6 col-md-offset-3 winner-card">`
     domString += `<h3>"It's a tie!"</h3>`
     domString += `</div>`
   }
@@ -60,7 +52,6 @@ const pointBuilder = (pointsArr) => {
 // Button Event Listener
 
 document.getElementById('btn1').addEventListener("click", startPlayer1);
-document.getElementById('btn1').addEventListener("click", startPlayer2)
 
 // XHR
 
@@ -68,6 +59,7 @@ function player1() {
   const data = JSON.parse(this.responseText);
   domStringBuilder(data);
   totalPoints.push(data.points.total);
+  startPlayer2()
 }
 
 function player2() {
@@ -75,6 +67,7 @@ function player2() {
   domStringBuilder(data);
   totalPoints.push(data.points.total);
   pointBuilder(totalPoints)
+  
 }
 
 function iFail() {
@@ -88,6 +81,7 @@ function startPlayer1() {
   myRequest.addEventListener("error", iFail);
   myRequest.open("GET", "https://teamtreehouse.com/" + userName + ".json");
   myRequest.send();
+  
 };
 
 function startPlayer2() {
