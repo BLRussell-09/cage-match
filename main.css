@@ -18,6 +18,7 @@ body {
 .user-image {
   height: auto;
   width: 50%;
+  border: 2px solid black
 }
 
 .winner-card {
