@@ -8,7 +8,8 @@ const printToDom = (domString, divId) => {
 
 const domStringBuilder = (userArr) => {
   let domString = ''; 
-    domString += `<div class="col-md-6 user-card">`
+    domString += `<div class="col-md-5 col-md-offset-1 user-card">`
+    domString += `<div>`
     domString += `<h3>${userArr.name}</h3>`
     domString += `<img class="img-circle user-image" src="${userArr.gravatar_url}">`
     domString += `<div class="row">`
@@ -20,7 +21,7 @@ const domStringBuilder = (userArr) => {
     domString += `</div>`
     domString += `<h3>${userArr.points.total}</h3>`
     domString += `</div>`
-
+    domString += `</div>`
   printToDom(domString, 'pic-holder');
 }
 
